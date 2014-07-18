@@ -130,7 +130,7 @@ fi
 # Copy graphviz or fail the build
 if test -d $cache_dir/graphviz; then
   status "Copying Graphviz to ./node_modules/.bin"
-  cp $cache_dir/graphviz/* $build_dir/node_modules/.bin
+  cp $cache_dir/graphviz/bin/* $build_dir/node_modules/.bin
 else
   status "No Graphviz. Use https://github.com/SoftwareMarbles/heroku-buildpack-graphviz"
   return 1
