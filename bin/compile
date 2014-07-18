@@ -127,6 +127,15 @@ if [ ! -e $build_dir/Procfile ]; then
   fi
 fi
 
+# Copy graphviz or fail the build
+if test -d $cache_dir/graphviz
+  status "Copying Graphviz to $HOME/node_modules/.bin"
+  cp $cache_dir/graphviz/* $HOME/node_modules/.bin
+else
+  status "No Graphviz. Use https://github.com/SoftwareMarbles/heroku-buildpack-graphviz"
+  return 1
+fi
+
 # Update the PATH
 status "Building runtime environment"
 mkdir -p $build_dir/.profile.d
