@@ -128,7 +128,7 @@ if [ ! -e $build_dir/Procfile ]; then
 fi
 
 # Copy graphviz or fail the build
-if test -d $cache_dir/graphviz
+if test -d $cache_dir/graphviz; then
   status "Copying Graphviz to $HOME/node_modules/.bin"
   cp $cache_dir/graphviz/* $HOME/node_modules/.bin
 else
