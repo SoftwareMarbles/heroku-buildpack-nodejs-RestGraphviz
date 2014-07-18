@@ -129,10 +129,10 @@ fi
 
 # Copy graphviz or fail the build
 if test -d $cache_dir/graphviz; then
-  status "Copying Graphviz to ./node_modules/.bin"
+  status "Copying Graphviz/bin to app/node_modules/.bin"
   cp $cache_dir/graphviz/bin/* $build_dir/node_modules/.bin
-  mkdir -p $build_dir/tools/graphviz
-  cp -R $cache_dir/graphviz $build_dir/tools/graphviz
+  status "Copying Graphviz to app"
+  cp -R $cache_dir/graphviz $build_dir
 else
   status "No Graphviz. Use https://github.com/SoftwareMarbles/heroku-buildpack-graphviz"
   return 1
@@ -142,6 +142,7 @@ fi
 status "Building runtime environment"
 mkdir -p $build_dir/.profile.d
 echo "export PATH=\"\$HOME/vendor/node/bin:\$HOME/bin:\$HOME/node_modules/.bin:\$PATH\";" > $build_dir/.profile.d/nodejs.sh
+echo "export LD_LIBRARY_PATH=\"\$HOME/graphviz/lib:\$LD_LIBRARY_PATH\";" >> $build_dir/.profile.d/nodejs.sh
 
 # Post package.json to nomnom service
 # Use a subshell so failures won't break the build.
